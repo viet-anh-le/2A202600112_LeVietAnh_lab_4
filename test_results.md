@@ -1,4 +1,4 @@
-**Test 1: Direct answer**
+**Test 1: Direct answer** <br>
 Bạn: Xin chào! Tôi đang muốn đi du lịch nhưng chưa biết đi đâu.
 
 TravelBuddy đang suy nghĩ...
@@ -6,7 +6,7 @@ Trả lời trực tiếp
 
 TravelBuddy: Chào bạn! Thật tuyệt khi bạn muốn đi du lịch. Bạn có những sở thích gì, hay muốn khám phá địa điểm nào hay không? Ví dụ như biển, núi, thành phố hay những điểm tham quan văn hóa? Nếu bạn có thời gian cụ thể hoặc ngân sách nào, mình có thể gợi ý cho bạn nơi phù hợp hơn!
 
-**Test 2: Single Tool Call**
+**Test 2: Single Tool Call** <br>
 Bạn: Tìm giúp tôi chuyến bay từ Hà Nội đi Đà Nẵng
 
 TravelBuddy đang suy nghĩ...
@@ -33,7 +33,7 @@ TravelBuddy: Đây là thông tin về các chuyến bay từ Hà Nội đi Đà
 
 Nếu bạn cần đặt vé hoặc có thêm thông tin gì khác, hãy cho mình biết nhé!
 
-**Test 3: Multi-step Tool Chaining**
+**Test 3: Multi-step Tool Chaining** <br>
 Bạn: Tôi ở Hà Nội, muốn đi Phú Quốc 2 đêm, budget 5 triệu. Tư vấn giúp!
 
 TravelBuddy đang suy nghĩ...
@@ -82,7 +82,7 @@ Còn nếu bạn chọn **Sol by Meliá**:
 
 Bạn muốn đặt chuyến bay và khách sạn nào không?
 
-**Test 4: Tôi muốn đặt khách sạn**
+**Test 4: Tôi muốn đặt khách sạn** <br>
 
 Bạn: Tôi muốn đặt khách sạn
 
@@ -110,7 +110,7 @@ TravelBuddy: Mình đã tìm được một lựa chọn khách sạn phù hợp
 
 Gợi ý thêm: Nếu bạn cần thêm thông tin về các dịch vụ, địa điểm ăn uống hay các hoạt động xung quanh, mình có thể giúp bạn tìm kiếm nhé! Bạn có muốn đặt phòng không?
 
-**Test 5: Giải giúp tôi bài tập lập trình Python về linked list**
+**Test 5: Giải giúp tôi bài tập lập trình Python về linked list** <br>
 
 Bạn: Giải giúp tôi bài tập lập trình Python về linked list
 
