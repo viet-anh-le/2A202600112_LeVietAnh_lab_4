@@ -5,9 +5,10 @@ from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage, AIMessage
+from langchain_core.messages import SystemMessage, ToolMessage, AIMessage
 from tools import search_flights, search_hotels, calculate_budget
 from dotenv import load_dotenv
+import traceback
 
 load_dotenv()
 
@@ -29,41 +30,42 @@ llm_with_tools = llm.bind_tools(tools_list)
 
 # 4. Agent Node (Đã cập nhật Sliding Window)
 def agent_node(state: AgentState):
-    messages = state["messages"]
+    try:
+        messages = state["messages"]
+        system_msg = [SystemMessage(content=SYSTEM_PROMPT)]
 
-    system_msg = [SystemMessage(content=SYSTEM_PROMPT)]
+        history = [m for m in messages if not isinstance(m, SystemMessage)]
 
-    history = [m for m in messages if not isinstance(m, SystemMessage)]
+        WINDOW_SIZE = 10
+        if len(history) > WINDOW_SIZE:
+            trimmed_history = history[-WINDOW_SIZE:]
+            while trimmed_history and isinstance(trimmed_history[0], ToolMessage):
+                trimmed_history.pop(0)
+        else:
+            trimmed_history = history
 
-    WINDOW_SIZE = 10
+        final_messages = system_msg + trimmed_history
 
-    if len(history) > WINDOW_SIZE:
-        trimmed_history = history[-WINDOW_SIZE:]
+        response = llm_with_tools.invoke(final_messages)
 
-        start_idx = 0
-        for i, msg in enumerate(trimmed_history):
-            if isinstance(msg, ToolMessage):
-                for j in range(i - 1, -1, -1):
-                    if isinstance(trimmed_history[j], AIMessage):
-                        start_idx = j
-                        break
-                break
+        if response.tool_calls:
+            for tc in response.tool_calls:
+                print(f"Gọi tool: {tc['name']}({tc['args']})")
+        else:
+            print(f"Trả lời trực tiếp")
 
-        trimmed_history = trimmed_history[start_idx:]
-    else:
-        trimmed_history = history
+        return {"messages": [response]}
 
-    final_messages = system_msg + trimmed_history
-
-    response = llm_with_tools.invoke(final_messages)
-
-    # === LOGGING ===
-    if response.tool_calls:
-        for tc in response.tool_calls:
-            print(f"Gọi tool: {tc['name']}({tc['args']})")
-    else:
-        print(f"Trả lời trực tiếp")
-    return {"messages": [response]}
+    except Exception:
+        print("[ERROR] Exception in agent_node:")
+        traceback.print_exc()
+        return {
+            "messages": [
+                AIMessage(
+                    content="Hệ thống đang gặp chút sự cố. Mình sẽ chuyển yêu cầu cho nhân viên hỗ trợ ngay nhé."
+                )
+            ]
+        }
 
 
 # 5. Xây dựng Graph

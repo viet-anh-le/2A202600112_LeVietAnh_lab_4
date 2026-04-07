@@ -37,9 +37,9 @@ Nếu bạn cần đặt vé hoặc có thêm thông tin gì khác, hãy cho mì
 Bạn: Tôi ở Hà Nội, muốn đi Phú Quốc 2 đêm, budget 5 triệu. Tư vấn giúp!
 
 TravelBuddy đang suy nghĩ...
-Gọi tool: search*flights({'origin': 'Hà Nội', 'destination': 'Phú Quốc'})
-Gọi tool: search_hotels({'city': 'Phú Quốc', 'max_price_per_night': 2500000})
-Gọi tool: calculate_budget({'total_budget': 5000000, 'expenses': 'vé_máy_bay:1100000,khách_sạn_2*đêm:2000000'})
+Gọi tool: search_flights({'origin': 'Hà Nội', 'destination': 'Phú Quốc'}) <br>
+Gọi tool: search_hotels({'city': 'Phú Quốc', 'max_price_per_night': 2500000}) <br>
+Gọi tool: calculate_budget({'total_budget': 5000000, 'expenses': 'vé_máy_bay:1100000,khách_sạn_2\*đêm:2000000'}) <br>
 Trả lời trực tiếp
 
 TravelBuddy: Dưới đây là thông tin chuyến đi từ Hà Nội đến Phú Quốc mà mình đã tìm kiếm cho bạn:
